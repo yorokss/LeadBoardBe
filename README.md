@@ -61,7 +61,7 @@ npm start
 
 cd microservices
 pip install flask pymongo python-dotenv "dependency" 
-python sessionLogger.py
+run python sessionLogger.py
 
 
 4️⃣ Frontend Setup
@@ -92,6 +92,24 @@ Register a new user
 
 { "name": "John", "email": "john@example.com", "password": "Test@123" }
 
+✅ Successful register Response
+
+  {
+    "message": "user created successfully",
+    "data": {
+        "name": "Agent470",
+        "password": "$2b$10$mOc590UX5iy1MogcUctac.Z59xB3z2RAz/"
+        "email": "hitman1@example.com",
+        "_id": "67b33cc74fa756c00afdebfd",
+        "createdAt": "2025-02-17T13:42:31.877Z",
+        "updatedAt": "2025-02-17T13:42:31.877Z",
+        "__v": 0
+    }
+}
+Response:
+Success: 200 OK with a success message and user data.
+Failure: 400 Bad Request if the user already exists or something went wrong.
+Failure: 500 Bad Request if "Something went wrong.
 POST
 
 /api/auth/login
@@ -110,6 +128,10 @@ Login & get JWT token
     "email": "john@example.com"
   }
 }
+Response:
+Success: 200 OK with a success message, token, and user data (excluding password).
+Failure: 400 Bad Request if the user is not found or password is invalid.
+Failure: 500 Bad Request if "Something went wrong.
 
 2️⃣ Leaderboard & Scores
 
@@ -124,10 +146,25 @@ Auth Required?
 POST
 
 /api/score
+✅ Successful score addition Response
 
-Submit a new score
+{
+  "message": "Score submitted successfully",
+  "data": {
+    "_id": "scoreId12345",
+    "userID": "userId12345",
+    "score": 100,
+    "createdAt": "2025-02-17T00:00:00.000Z",
+    "updatedAt": "2025-02-17T00:00:00.000Z",
+    "__v": 0
+  }
+} 
 
-✅ Yes
+Response:
+Success: 201 OK with a success message and user data.
+Failure: 400 Bad Request if the User not found
+Failure: 500 Bad Request if "Something went wrong.
+
 
 GET
 
@@ -135,8 +172,11 @@ GET
 
 Get top 10 leaderboard
 
-❌ No
-
+Response:
+Success: 201 OK with a success message and user data.
+Failure: 400 Bad Request if the User not found
+Failure: 500 Bad Request if "Something went wrong.
+Failure: 401 Bad Request if "Please authenticate using a valid token.
 ✅ Submit Score Request
 
 POST /api/score
