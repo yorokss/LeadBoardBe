@@ -12,7 +12,6 @@ const userSchema = new Schema(
       type: String,
       required: true,
       minLength: [5, "password must be 5 characters long"],
-      match: /^(?=.*[A-Z])(?=.*[\W_]).{5,}$/,
     },
     email: {
       type: String,
